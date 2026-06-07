@@ -1,39 +1,64 @@
 # sentinel-core
 
-**Trust engine, attestation, identity registry.**
+**Trust engine for autonomous systems** — identity, attestation, trust scoring, and tamper-evident audit. Written in Rust.
 
-- Language: Rust
-- License: Apache 2.0
-- Status: Pre-alpha
+[![ci](https://github.com/Sentinels-Today/sentinel-core/actions/workflows/ci.yml/badge.svg)](https://github.com/Sentinels-Today/sentinel-core/actions/workflows/ci.yml)
+![license](https://img.shields.io/badge/license-Apache--2.0-blue)
+![rust](https://img.shields.io/badge/rust-1.75%2B-orange)
 
-## Overview
+## Crates
 
-The core trust engine handles device identity, attestation verification, trust score computation, and audit trail generation.
+| Crate | What it does |
+|---|---|
+| [`sentinel-identity`](./crates/sentinel-identity) | Ed25519 device keypair + `did:sentinel:<hex>` identifiers |
+| [`sentinel-attestation`](./crates/sentinel-attestation) | Signed attestation claims (firmware hash, measured boot, SBOM) |
+| [`sentinel-trust`](./crates/sentinel-trust) | Deterministic trust scoring (`0..=100` + level) |
+| [`sentinel-audit`](./crates/sentinel-audit) | SHA-256 hash-chained audit log with optional per-entry Ed25519 signatures |
+| [`sentinel-core`](./crates/sentinel-core) | Umbrella crate that re-exports the four building blocks |
 
-## About Sentinel Labs
+## Quick start
 
-Our mission is to support the entire autonomous systems ecosystem.
+```rust
+use sentinel_core::{
+    attestation::{Claim, ClaimBody, ClaimKind},
+    audit::AuditChain,
+    identity::DeviceIdentity,
+    trust::{compute, TrustInputs},
+};
 
-Identity, attestation, telemetry, and audit are our focus points. Cryptography and openness are baked into the core of everything we do.
+let device = DeviceIdentity::generate();
+let claim = Claim::sign(&device, ClaimBody {
+    kind: ClaimKind::FirmwareHash,
+    subject: device.did().clone(),
+    issued_at: chrono::Utc::now(),
+    nonce: "1".into(),
+    payload: serde_json::json!({"sha256": "abc"}),
+})?;
+claim.verify()?;
 
-## Ecosystem
+let mut chain = AuditChain::new();
+chain.append("robot-1", "attest", serde_json::json!({}), Some(&device))?;
+chain.verify()?;
+```
 
-- [sentinel-core](https://github.com/SentinelsToday/sentinel-core) -- Trust engine
-- [sentinel-agent](https://github.com/SentinelsToday/sentinel-agent) -- On-device daemon
-- [sentinel-cloud](https://github.com/SentinelsToday/sentinel-cloud) -- Fleet management API
-- [sentinel-chain](https://github.com/SentinelsToday/sentinel-chain) -- Solana attestation
-- [sentinel-sdk](https://github.com/SentinelsToday/sentinel-sdk) -- Multi-language SDK
-- [sentinel-cli](https://github.com/SentinelsToday/sentinel-cli) -- Command-line tool
-- [sentinel-dashboard](https://github.com/SentinelsToday/sentinel-dashboard) -- Web UI
-- [sentinel-firmware](https://github.com/SentinelsToday/sentinel-firmware) -- TPM firmware
-- [sentinel-docs](https://github.com/SentinelsToday/sentinel-docs) -- Documentation
+## Develop
 
-## Resources
+```sh
+cargo fmt --all
+cargo clippy --all-targets -- -D warnings
+cargo test --workspace
+```
 
-- Website: https://sentinels.today
-- Docs: https://sentinels.today/docs
-- X: @sentinelstoday
+## License
 
----
+Apache-2.0 — see [LICENSE](./LICENSE).
 
-Built with care and intent.
+## About
+
+Part of [Sentinel Labs](https://sentinels.today). Other components:
+[`sentinel-agent`](https://github.com/Sentinels-Today/sentinel-agent) ·
+[`sentinel-cloud`](https://github.com/Sentinels-Today/sentinel-cloud) ·
+[`sentinel-dashboard`](https://github.com/Sentinels-Today/sentinel-dashboard) ·
+[`sentinel-sdk`](https://github.com/Sentinels-Today/sentinel-sdk) ·
+[`sentinel-chain`](https://github.com/Sentinels-Today/sentinel-chain) ·
+[`sentinel-cli`](https://github.com/Sentinels-Today/sentinel-cli)

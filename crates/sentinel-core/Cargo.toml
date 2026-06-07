@@ -1,0 +1,21 @@
+[package]
+name = "sentinel-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+rust-version.workspace = true
+description = "Sentinel Labs trust engine: identity, attestation, trust scoring, and audit."
+readme = "../../README.md"
+
+[dependencies]
+sentinel-identity = { path = "../sentinel-identity", version = "0.1.0" }
+sentinel-attestation = { path = "../sentinel-attestation", version = "0.1.0" }
+sentinel-trust = { path = "../sentinel-trust", version = "0.1.0" }
+sentinel-audit = { path = "../sentinel-audit", version = "0.1.0" }
+
+[dev-dependencies]
+chrono = { workspace = true }
+serde_json = { workspace = true }

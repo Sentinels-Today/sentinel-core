@@ -127,13 +127,13 @@ Repository-specific testing requirements are documented in each repository's REA
 
 ## Security Issues
 
-Do not file a public issue for security vulnerabilities. Report them to security@sentinellabs.io. See [SECURITY.md](SECURITY.md) for details.
+Do not file a public issue for security vulnerabilities. Report them to admin@sentinels.today. See [SECURITY.md](SECURITY.md) for details.
 
 ## Getting Help
 
 - Open a GitHub Discussion in the relevant repository.
 - Join our Discord for real-time conversation.
-- Tag `sentinellabs` on Stack Overflow.
+- Tag `sentinelstoday` on Stack Overflow.
 
 ## Recognition
 

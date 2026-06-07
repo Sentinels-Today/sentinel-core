@@ -14,7 +14,7 @@ edition = "2021"
 license = "Apache-2.0"
 repository = "https://github.com/Sentinels-Today/sentinel-core"
 homepage = "https://sentinels.today"
-authors = ["Sentinel Labs <hello@sentinels.today>"]
+authors = ["Sentinel Labs <admin@sentinels.today>"]
 rust-version = "1.75"
 
 [workspace.dependencies]

@@ -13,7 +13,7 @@ We take the security of Sentinel Labs software seriously. If you believe you hav
 
 **Do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.**
 
-Instead, send a report to **security@sentinellabs.io**.
+Instead, send a report to **admin@sentinels.today**.
 
 ### What to include
 
@@ -28,7 +28,7 @@ Instead, send a report to **security@sentinellabs.io**.
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
-Contact security@sentinellabs.io for the current PGP key.
+Contact admin@sentinels.today for the current PGP key.
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
@@ -43,7 +43,7 @@ Contact security@sentinellabs.io for the current PGP key.
 
 We follow a coordinated disclosure process:
 
-1. The reporter submits the vulnerability to security@sentinellabs.io.
+1. The reporter submits the vulnerability to admin@sentinels.today.
 2. Sentinel Labs acknowledges receipt and begins investigation.
 3. Sentinel Labs develops and tests a fix.
 4. Sentinel Labs releases a fix and notifies the reporter.
@@ -56,7 +56,7 @@ We aim to release fixes within 30 days of initial report for critical vulnerabil
 The following are in scope:
 
 - All Sentinel Labs open source repositories
-- Sentinel Labs cloud services (sentinellabs.io)
+- Sentinel Labs cloud services (sentinels.today)
 - Sentinel Labs API endpoints
 
 The following are out of scope:
@@ -88,5 +88,5 @@ Sentinel Labs does not currently operate a bug bounty program. Security research
 
 ## Contact
 
-- Security: security@sentinellabs.io
-- PGP: Contact security@sentinellabs.io for the current key.
+- Security: admin@sentinels.today
+- PGP: Contact admin@sentinels.today for the current key.
